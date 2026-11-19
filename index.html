@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller de Autodefensa Digital Feminista – UCT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400..900&family=Nunito+Sans:wght@400;700;800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#140726}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center}
+#stage>section{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:none}
+#stage>section.on{display:flex}
+table{border-collapse:collapse} th,td{padding:14px 22px;text-align:left;vertical-align:top;border-bottom:2px solid rgba(175,100,215,.55)} th{font-family:'League Spartan',Arial,sans-serif;font-weight:800}
+x-shape{display:block} x-shape.ellipse{border-radius:50%}
+img[data-video]{cursor:pointer}
+video.vid{background:#000}
+#nav{position:fixed;right:18px;bottom:14px;display:flex;gap:6px;align-items:center;background:rgba(20,7,38,.7);color:#FBF7FE;font:14px 'Nunito Sans',sans-serif;padding:6px 6px 6px 14px;border-radius:24px;opacity:.25;transition:opacity .3s;z-index:9}
+#nav:hover{opacity:1}
+#nav button{background:none;border:0;color:inherit;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+#nav button:hover{background:rgba(255,255,255,.15)}
+:root {
+  --dark: #2A0E4A;
+  --light: #FBF7FE;
+  --lilac: #EFE2F8;
+  --amaranta: #AF64D7;
+  --yellow: #F6CF3A;
+  --magenta: #D81B7A;
+  --ink: #23103A;
+  --soft: #5A4870;
+  --softdark: #E3D2F2;
+}
+body { font-family: 'Nunito Sans', Verdana, sans-serif; color: var(--ink); }
+section { padding: 128px; background: var(--light); color: var(--ink); display: flex; flex-direction: column; gap: 36px; }
+section.dark { background: var(--dark); color: var(--light); }
+section.lilac { background: var(--lilac); }
+section.amaranta { background: var(--amaranta); color: var(--dark); }
+section.yellow { background: var(--yellow); color: var(--dark); }
+section.center { justify-content: center; }
+
+h1 { font-family: 'League Spartan', Arial, sans-serif; font-weight: 900; font-size: 128px; line-height: 0.95; }
+h2 { font-family: 'League Spartan', Arial, sans-serif; font-weight: 800; font-size: 76px; line-height: 1.0; }
+h3 { font-family: 'League Spartan', Arial, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; }
+p { font-size: 32px; line-height: 1.38; }
+li { font-size: 32px; line-height: 1.4; }
+
+.eyebrow { font-family: 'League Spartan', Arial, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 8px; text-transform: uppercase; color: var(--magenta); }
+.dark .eyebrow { color: var(--yellow); }
+.yellow .eyebrow { color: var(--dark); }
+.amaranta .eyebrow { color: var(--dark); }
+.lead { font-size: 38px; line-height: 1.3; }
+.dark .lead { color: var(--softdark); }
+.muted { color: var(--soft); }
+.dark .muted { color: var(--softdark); }
+.small { font-size: 26px; line-height: 1.35; }
+.hl { color: var(--magenta); }
+.dark .hl { color: var(--yellow); }
+.amaranta .hl { color: #FFFFFF; }
+
+.row { display: flex; gap: 40px; }
+.grow { flex: 1; }
+.col { width: 880px; display: flex; flex-direction: column; gap: 32px; flex: 1; }
+.split-img { position: absolute; left: 1088px; top: 0; width: 832px; height: 1080px; object-fit: cover; }
+.logo-sm { position: absolute; left: 1712px; top: 40px; width: 168px; height: 121px; border-radius: 14px; }
+
+.cards2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.cards3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+.stack { display: flex; flex-direction: column; gap: 20px; }
+.card { background: #FFFFFF; border-radius: 28px; padding: 36px 40px; display: flex; flex-direction: column; gap: 14px; border: 4px solid var(--dark); }
+.lilac .card { background: #FFFFFF; }
+.dark .card { background: #3B1C62; border-color: var(--amaranta); }
+.dark .card p { color: var(--softdark); }
+.card .tag { font-family: 'League Spartan', Arial, sans-serif; font-size: 26px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--magenta); }
+.dark .card .tag { color: var(--yellow); }
+.card .big { font-family: 'League Spartan', Arial, sans-serif; font-weight: 900; font-size: 72px; line-height: 1; color: var(--magenta); }
+.card .body { font-size: 28px; line-height: 1.36; }
+.card.accent { background: var(--yellow); color: var(--dark); }
+.card.accent .tag { color: var(--dark); }
+.card.purple { background: #7E3AA8; color: #FFFFFF; }
+.card.purple .tag { color: var(--yellow); }
+.line { background: #FFFFFF; border: 4px solid var(--dark); border-radius: 20px; padding: 18px 28px; display: flex; gap: 20px; align-items: baseline; }
+.line .tag { font-family: 'League Spartan', Arial, sans-serif; font-size: 26px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); min-width: 220px; }
+.line .body { font-size: 28px; line-height: 1.3; }
+
+.num { font-family: 'League Spartan', Arial, sans-serif; font-weight: 900; font-size: 60px; line-height: 1; color: var(--magenta); min-width: 64px; }
+.dark .num { color: var(--yellow); }
+.step { display: flex; gap: 24px; align-items: flex-start; }
+.step .txt { display: flex; flex-direction: column; gap: 4px; }
+.steps { display: flex; flex-direction: column; gap: 26px; }
+
+.stat { font-family: 'League Spartan', Arial, sans-serif; font-weight: 900; font-size: 300px; line-height: 0.85; color: var(--yellow); }
+.quote { font-family: 'League Spartan', Arial, sans-serif; font-weight: 900; font-size: 84px; line-height: 1.0; }
+.source { font-size: 24px; color: var(--soft); }
+.dark .source { color: var(--softdark); }
+.amaranta .source { color: var(--dark); }
+
+.shot { border-radius: 18px; border: 4px solid var(--dark); box-shadow: 14px 14px 0 var(--amaranta); object-fit: cover; }
+.dark .shot { border-color: var(--light); box-shadow: 14px 14px 0 var(--magenta); }
+
+.bingo { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; gap: 18px; flex: 1; background: #FFFFFF; border: 5px solid var(--dark); padding: 20px; }
+.cell { border: 5px solid var(--dark); background: #FFFFFF; color: var(--ink); padding: 18px; min-height: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.cell p { font-family: 'League Spartan', Arial, sans-serif; font-size: 27px; line-height: 1.12; font-weight: 800; text-align: center; }
+.cell.logo { background: var(--amaranta); padding: 0; overflow: hidden; }
+
+.time { font-family: 'League Spartan', Arial, sans-serif; font-weight: 800; font-size: 32px; color: var(--magenta); min-width: 220px; }
+.agenda-row { display: flex; gap: 28px; align-items: baseline; padding-bottom: 16px; border-bottom: 3px solid var(--amaranta); }
+.agenda-row p { font-size: 30px; }
+
+.phone { width: 400px; background: #FFFFFF; color: var(--ink); border: 10px solid var(--dark); border-radius: 48px; padding: 28px 24px; display: flex; flex-direction: column; gap: 10px; }
+.phone .bar { font-family: 'League Spartan', Arial, sans-serif; font-weight: 800; font-size: 28px; padding-bottom: 12px; border-bottom: 3px solid var(--lilac); }
+.phone .item { font-size: 26px; padding: 10px 16px; border-radius: 14px; color: var(--ink); }
+.phone .item.on { background: var(--magenta); color: #FFFFFF; font-weight: 800; }
+.phone-col { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+.phone-col .cap { font-size: 26px; text-align: center; width: 420px; line-height: 1.3; }
+.mail { background: #FFFFFF; border: 4px solid var(--dark); border-radius: 20px; padding: 28px 36px; display: flex; flex-direction: column; gap: 10px; }
+.mail p { font-size: 24px; line-height: 1.35; }
+.mail .hdr { font-weight: 800; color: var(--magenta); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } }
+.rise { animation: rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 120ms); }
+@keyframes fadein { from { opacity: 0; } }
+.split-img { animation: fadein 700ms ease-out both; }
+.fade { animation: fadein 600ms ease-out both; animation-delay: calc(var(--i, 0) * 180ms); }
+
+.cards5 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 20px; }
+.cards5 .body { font-size: 26px; line-height: 1.32; }
+.phrase { font-family: 'League Spartan', Arial, sans-serif; font-weight: 800; font-size: 64px; color: var(--magenta); background: #FFFFFF; border: 4px solid var(--dark); border-radius: 20px; padding: 16px 36px; align-self: flex-start; }
+.tbl { font-size: 28px; color: var(--ink); width: 1664px; }
+.dark .tbl { color: var(--light); }
+.tbl tr:first-child { background: var(--amaranta); color: var(--dark); }
+.tag-title { font-family: 'League Spartan', Arial, sans-serif; font-size: 30px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--yellow); }
+.dark .line.dline { background: #3B1C62; border-color: var(--amaranta); }
+.dark .line.dline .body { color: var(--light); }
+
+.split-left { position: absolute; left: 0; top: 0; width: 832px; height: 1080px; object-fit: cover; }
+.col-right { margin-left: 768px; width: 896px; flex: none; }
+.photo-full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+.scrim { background: rgba(42,14,74,0.86); border-radius: 28px; padding: 40px 48px; display: flex; flex-direction: column; gap: 18px; width: 980px; color: #FBF7FE; }
+.scrim h2 { color: #FBF7FE; }
+.fragment { opacity: 0; transform: translateY(16px); transition: opacity 320ms ease-out, transform 320ms ease-out; }
+.fragment.visible { opacity: 1; transform: translateY(0); }
+.dark .card.accent { background: var(--yellow); border-color: var(--yellow); }
+.dark .card.accent p, .dark .card.accent .body, .dark .card.accent h3 { color: var(--dark); }
+.dark .card.accent .tag { color: var(--dark); }
+
+/* Animaciones de entrada en toda la presentación */
+@keyframes reveal { from { opacity: 0; filter: blur(10px); } }
+@keyframes pop { from { opacity: 0; transform: scale(0.93); } }
+.eyebrow:not(.rise) { animation: fadein 500ms ease-out both; }
+h2:not(.rise), h1:not(.rise) { animation: rise 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: 80ms; }
+.col > p:not(.rise):not(.eyebrow):not(.source) { animation: fadein 600ms ease-out both; animation-delay: 260ms; }
+.source { animation: fadein 700ms ease-out both; animation-delay: 700ms; }
+.shot:not(.fade):not(.rise) { animation: reveal 800ms ease-out both; animation-delay: 300ms; }
+.split-left, .photo-full { animation: fadein 800ms ease-out both; }
+.logo-sm { animation: fadein 900ms ease-out both; animation-delay: 500ms; }
+.pop, .phone, .mail { animation: pop 650ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: 250ms; }
+.tbl { animation: fadein 700ms ease-out both; animation-delay: 300ms; }
+.stack > .card:not(.rise), .stack > .line:not(.rise), .cards2 > .card:not(.rise), .cards2 > .row, .cards3 > .card:not(.rise), .cards5 > .card:not(.rise), .steps > .step, .agenda-row { animation: rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: 220ms; }
+.stack > :nth-child(2):not(.rise), .cards2 > :nth-child(2):not(.rise), .cards3 > :nth-child(2):not(.rise), .cards5 > :nth-child(2):not(.rise), .steps > :nth-child(2), .agenda-row:nth-child(2) { animation-delay: 320ms; }
+.stack > :nth-child(3):not(.rise), .cards2 > :nth-child(3):not(.rise), .cards3 > :nth-child(3):not(.rise), .cards5 > :nth-child(3):not(.rise), .steps > :nth-child(3), .agenda-row:nth-child(3) { animation-delay: 420ms; }
+.stack > :nth-child(4):not(.rise), .cards2 > :nth-child(4):not(.rise), .cards5 > :nth-child(4):not(.rise), .steps > :nth-child(4), .agenda-row:nth-child(4) { animation-delay: 520ms; }
+.stack > :nth-child(5):not(.rise), .cards5 > :nth-child(5):not(.rise), .steps > :nth-child(5), .agenda-row:nth-child(5) { animation-delay: 620ms; }
+.stack > :nth-child(6):not(.rise), .steps > :nth-child(6), .agenda-row:nth-child(6) { animation-delay: 700ms; }
+.agenda-row:nth-child(7) { animation-delay: 780ms; }
+.agenda-row:nth-child(8) { animation-delay: 860ms; }
+
+</style></head><body>
+<div id="stage">
+<section id="cover" class="amaranta center" data-transition="fade">
+<img class="split-img" src="assets/d5d5e532f6e46f6277de795af3c0b471.jpg" alt="Ilustración de Amaranta: una mujer mira su celular">
+<div class="col" style="justify-content:center;">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" style="width:260px; height:187px;">
+<p class="eyebrow rise">Taller</p>
+<h1 class="rise" style="--i:1">Autodefensa<br>digital<br><span class="hl">feminista</span></h1>
+<p class="lead rise" style="--i:2">Herramientas para prevenir y enfrentar el acoso y la violencia en entornos digitales.</p>
+<p class="small rise" style="--i:3"><b>UC Temuco</b> · Dirección de Género · FEUCT · Jueves 19 de noviembre · 15:00 a 17:00</p>
+</div>
+
+</section>
+<section id="cuidado" class="lilac">
+<img class="split-img" src="assets/5003bec74e758f5bab2b6eedcb77d594.jpg" alt="Ilustración de Amaranta: manos formando un corazón con pañuelos de colores">
+<div class="col">
+<p class="eyebrow">Antes de empezar</p>
+<h2>Acuerdos de cuidado</h2>
+<div class="stack">
+<div class="card rise" style="--i:0; padding:24px 32px;"><p class="tag">Lo que se cuenta aquí, queda aquí</p><p class="body">Sin nombres, sin exponer a nadie.</p></div>
+<div class="card rise" style="--i:1; padding:24px 32px;"><p class="tag">Nunca es culpa de quien la vive</p><p class="body">La pregunta es quién decidió dañar.</p></div>
+<div class="card rise" style="--i:2; padding:24px 32px;"><p class="tag">Puedes salir cuando quieras</p><p class="body">Si algo te remueve, sal, respira o búscame.</p></div>
+<div class="card accent rise" style="--i:3; padding:24px 32px;"><p class="tag">Celular en la mano</p><p class="body">Hoy no lo guardamos: lo configuramos juntas.</p></div>
+</div>
+</div>
+
+</section>
+<section id="agenda">
+<img class="split-img" src="assets/691272b991bdd5a6edcd3a78038b5033.jpg" alt="Ilustración de Amaranta: tres puños en alto">
+<div class="col">
+<p class="eyebrow">Dos horas, ocho momentos</p>
+<h2>Lo que haremos hoy</h2>
+<div style="display:flex; flex-direction:column; gap:10px;">
+<div class="agenda-row"><p class="time">15:00</p><p><b>Abrir.</b> Acuerdos y semáforo.</p></div>
+<div class="agenda-row"><p class="time">15:10</p><p><b>Por qué.</b> Amaranta y nuestra historia.</p></div>
+<div class="agenda-row"><p class="time">15:35</p><p><b>Situar.</b> Lo que pasa aquí, ahora.</p></div>
+<div class="agenda-row"><p class="time">15:50</p><p><b>Nombrar.</b> Qué es esta violencia.</p></div>
+<div class="agenda-row"><p class="time">16:05</p><p><b>Pausa.</b> Cinco minutos.</p></div>
+<div class="agenda-row"><p class="time">16:10</p><p><b>Hacer.</b> Bingo y Telegram en vivo.</p></div>
+<div class="agenda-row"><p class="time">16:35</p><p>VPN, cifrado, espías.</p></div>
+<div class="agenda-row"><p class="time">16:48</p><p><b>Responder.</b> Qué hacer y a quién acudir.</p></div>
+</div>
+</div>
+
+</section>
+<section id="semaforo" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Encuesta rápida · semáforo</p>
+<h2>Levanta tu tarjeta: verde, amarilla o roja</h2>
+<div class="cards3 grow">
+<div class="card rise" style="--i:0"><p class="big">1</p><p class="body">¿Me siento tranquila usando mi celular y mis redes?</p></div>
+<div class="card rise" style="--i:1"><p class="big">2</p><p class="body">¿He sentido miedo o incomodidad por algo que me pasó en internet?</p></div>
+<div class="card rise" style="--i:2"><p class="big">3</p><p class="body">Si me pasara algo grave en internet, ¿sabría a quién pedir ayuda?</p></div>
+</div>
+<div class="row" style="gap:48px; align-items:center;">
+<div class="row" style="gap:16px; align-items:center;"><x-shape class="ellipse" style="width:44px; height:44px; background:#3FBF6B;"></x-shape><p class="small">Verde: sí, tranquila</p></div>
+<div class="row" style="gap:16px; align-items:center;"><x-shape class="ellipse" style="width:44px; height:44px; background:#F6CF3A;"></x-shape><p class="small">Amarilla: más o menos</p></div>
+<div class="row" style="gap:16px; align-items:center;"><x-shape class="ellipse" style="width:44px; height:44px; background:#E8434F;"></x-shape><p class="small">Roja: no, para nada</p></div>
+</div>
+
+</section>
+<section id="amaranta" class="lilac">
+<img class="shot" src="assets/ee2a56bc934eedae23cbab672256a5ce.jpg" alt="Portada del sitio amarantas.org: Tecnología, género y derechos humanos" style="position:absolute; left:1000px; top:150px; width:800px; height:500px; transform:rotate(2deg);">
+<img class="shot" src="assets/33553cfa74744f8179403cb29e867eaa.jpg" alt="Lámina de Amaranta: ¿Quiénes somos?" style="position:absolute; left:1060px; top:600px; width:640px; height:360px; transform:rotate(-3deg);">
+<div class="col" style="width:820px; flex:none;">
+<p class="eyebrow">¿Quiénes somos?</p>
+<h2>ONG Amaranta</h2>
+<p class="lead rise">Un espacio de trabajo, activismo e investigación feminista contra las violencias y desigualdades.</p>
+<div class="stack">
+<div class="line rise" style="--i:1"><p class="tag" style="min-width:170px;">Desde 2018</p><p class="body">Nacimos en Concepción.</p></div>
+<div class="line rise" style="--i:2"><p class="tag" style="min-width:170px;">Somos 11</p><p class="body">Compañeras de Chillán, Concepción y Santiago.</p></div>
+<div class="line rise" style="--i:3" ><p class="tag" style="min-width:170px;">Llegar antes</p><p class="body">Trabajo preventivo y educativo.</p></div>
+</div>
+</div>
+
+</section>
+<section id="amaranta-trabajo">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Lo que hacemos</p>
+<h2>Investigamos, educamos y explicamos</h2>
+<div class="cards3 grow">
+<div class="stack rise" style="--i:0"><img class="shot" src="assets/e9f0bfab6f94e1f036599cc1e63eaf63.jpg" alt="Portada del informe Aurora: Chile y la violencia de género en Internet" style="width:520px; height:292px;"><h3>Proyecto Aurora</h3><p class="small">Encuesta a 531 mujeres de las 16 regiones sobre violencia en internet.</p></div>
+<div class="stack rise" style="--i:1"><img class="shot" src="assets/5008611832b00cc42307fd0f7ff37dfd.jpg" alt="Portada del libro Violencia política sexual y digital en Chile" style="width:520px; height:292px;"><h3>Violencia política sexual y digital</h3><p class="small">Experiencias, contexto histórico y nuevas manifestaciones en Chile.</p></div>
+<div class="stack rise" style="--i:2"><img class="shot" src="assets/3506da40c341900290f4964d524882bb.jpg" alt="Serie de videos Amaranta te lo explica" style="width:520px; height:292px;"><h3>Amaranta te lo explica</h3><p class="small">Videos cortos para entender y compartir.</p></div>
+</div>
+
+</section>
+<section id="origen-historia" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">¿De dónde viene? · desde Abya Yala</p>
+<h2>Una genealogía latinoamericana</h2>
+<div class="cards5 grow">
+<div class="card rise" style="--i:0; padding:28px 28px;"><p class="big" style="font-size:56px;">1981</p><p class="body">En Bogotá, el primer Encuentro Feminista Latinoamericano crea el 25 de noviembre.</p></div>
+<div class="card rise" style="--i:1; padding:28px 28px;"><p class="big" style="font-size:56px;">1992</p><p class="body">Mujeres Creando, en Bolivia, se toma la calle y el muro como medio propio.</p></div>
+<div class="card rise" style="--i:2; padding:28px 28px;"><p class="big" style="font-size:56px;">2015</p><p class="body">Ni Una Menos nace de un tuit en Argentina y llena las plazas.</p></div>
+<div class="card rise" style="--i:3; padding:28px 28px;"><p class="big" style="font-size:56px;">2017</p><p class="body">Acoso.Online (Chile) y Ciberseguras: guías de autodefensa digital.</p></div>
+<div class="card accent rise" style="--i:4; padding:28px 28px;"><p class="big" style="font-size:56px; color:#2A0E4A;">2018–21</p><p class="body">Mayo feminista, LasTesis y la Ley Olimpia en México.</p></div>
+</div>
+<p class="source">Raíces más antiguas: la autodefensa feminista de comienzos del siglo XX y el ciberfeminismo de los 90.</p>
+
+</section>
+<section id="hist-sufragistas" class="lilac">
+<img class="split-left" src="assets/dcfaa8c0cc3f48c53e9c319ce2f9ab0e.jpg" alt="Caricatura de Punch, 1910: The suffragette that knew jiu-jitsu. Una sufragista derriba a varios policías." style="object-fit:contain; background:#EDE5D3;">
+<div class="col col-right">
+<p class="eyebrow">Antecedente · 1909–1913</p>
+<h2>Las sufragistas que sabían jiu-jitsu</h2>
+<p class="lead">En Londres, Edith Garrud entrenó a sufragistas para resistir los golpes de la policía en las marchas por el voto.</p>
+<div class="card accent"><p class="body"><b>La idea que heredamos:</b> nadie nos iba a proteger, así que aprendimos a protegernos entre nosotras.</p></div>
+<p class="source">Caricatura de Arthur Wallis Mills, revista Punch, 1910. Dominio público, Wikimedia Commons.</p>
+</div>
+
+</section>
+<section id="hist-calle" class="dark">
+<img class="photo-full" src="assets/ee529aeb728f881db43821e88ae7698d.jpg" alt="Grafiti de Mujeres Creando en un muro de Bolivia: Mientras El Alto sea una esclava estará siempre de rodillas">
+<div class="scrim rise" style="margin-top:auto;">
+<p class="eyebrow">1992 · Bolivia</p>
+<h2>Mujeres Creando: el muro como medio propio</h2>
+<p class="body" style="font-size:30px;">Si los medios no nos nombran, escribimos en la calle. Grafiti, radio, performance: tomar la palabra también es autodefensa.</p>
+<p class="source" style="color:#E3D2F2;">Foto: Caleidoscopic, CC BY-SA 4.0, Wikimedia Commons.</p>
+</div>
+
+</section>
+<section id="hist-red" class="lilac">
+<img class="shot" src="assets/31f7d82b9c01429d0324ea05f3d4a2d3.jpg" alt="Marcha Ni Una Menos en Buenos Aires: miles de personas con carteles" style="position:absolute; left:128px; top:300px; width:1000px; height:575px; transform:rotate(-1.5deg);">
+<img class="shot" src="assets/17343b5a3eeed60fe83d88f6c83d0bbb.jpg" alt="Sitio de VNS Matrix: A Cyberfeminist Manifesto for the 21st Century, 1991" style="position:absolute; left:1200px; top:300px; width:592px; height:370px; transform:rotate(2deg);">
+<img class="shot" src="assets/7e1e65f4966825f1ce13660a68eb5185.jpg" alt="Sitio de la campaña Take Back the Tech / Dominemos la tecnología" style="position:absolute; left:1240px; top:640px; width:520px; height:325px; transform:rotate(-2deg);">
+<p class="eyebrow">2015 · Argentina, y más atrás</p>
+<h2>La red como plaza</h2>
+<p class="source" style="position:absolute; left:128px; top:960px; width:1000px;">Ni Una Menos: Jaluj, CC BY-SA 4.0. Pantallazos: vnsmatrix.net, takebackthetech.net.</p>
+
+</section>
+<section id="hist-olimpia" class="dark">
+<img class="split-left" src="assets/b6639866412335900fa5ef858ea228be.jpg" alt="Olimpia Coral Melo, activista mexicana impulsora de la Ley Olimpia">
+<div class="col col-right">
+<p class="eyebrow">México · 2013–2021</p>
+<h2>Olimpia: de víctima a ley</h2>
+<p class="lead">Difundieron un video íntimo suyo sin consentimiento. Ella respondió organizándose con otras mujeres.</p>
+<div class="stack">
+<div class="line dline rise" style="--i:0"><p class="tag" style="min-width:120px; color:#F6CF3A;">2018</p><p class="body">Puebla reconoce la violencia digital como delito.</p></div>
+<div class="line dline rise" style="--i:1"><p class="tag" style="min-width:120px; color:#F6CF3A;">2021</p><p class="body">La “Ley Olimpia” se aprueba en todo México.</p></div>
+</div>
+<img class="shot rise" src="assets/9b730a8a7ddcb370cd198b9dd9da3065.jpg" alt="Acto por la Ley Olimpia en la Ciudad de México" style="width:560px; height:300px; --i:2;">
+<p class="source">Fotos: EneasMx, CC BY-SA 4.0, Wikimedia Commons.</p>
+</div>
+
+</section>
+<section id="hist-chile" class="yellow">
+<img class="shot" src="assets/cac6902a4d534825489f91bc170f6b62.jpg" alt="Performance de LasTesis Un violador en tu camino, 25N 2020, mujeres con vendas negras en los ojos" style="position:absolute; left:128px; top:310px; width:900px; height:600px; transform:rotate(-1.5deg);">
+<img class="shot" src="assets/e5fac8d8e34a8c70f4fd970f532c3eed.jpg" alt="Marcha del 8 de marzo de 2020 en Santiago: carteles feministas" style="position:absolute; left:1100px; top:330px; width:692px; height:520px; transform:rotate(2deg);">
+<p class="eyebrow">Chile · 2018–2020</p>
+<h2>Chile: de las tomas a LasTesis</h2>
+<p class="source" style="position:absolute; left:128px; top:950px; width:1664px; color:#2A0E4A;">Fotos: Camiperezsoto y Carlos Teixidor Cadenas, CC BY-SA 4.0, Wikimedia Commons.</p>
+
+</section>
+<section id="hist-colectivas" class="dark">
+<p class="eyebrow">Hoy · hecha en Abya Yala</p>
+<h2>Colectivas que hacen autodefensa digital</h2>
+<div class="cards2 grow" style="grid-template-rows:1fr 1fr; gap:24px 40px;">
+<div class="row" style="gap:24px; align-items:center;"><img class="shot" src="assets/e774d0abc059c08b516eb755d156a0da.jpg" alt="Sitio de Ciberseguras" style="width:440px; height:275px;"><div class="stack"><h3>Ciberseguras</h3><p class="small">Red latinoamericana: guías para protegerte y cuidarte.</p></div></div>
+<div class="row" style="gap:24px; align-items:center;"><img class="shot" src="assets/ff0e69cb3baef18e0fa4df8f7c21f502.jpg" alt="Sitio de Luchadoras" style="width:440px; height:275px;"><div class="stack"><h3>Luchadoras</h3><p class="small">México. Habitar el espacio público, físico y digital.</p></div></div>
+<div class="row" style="gap:24px; align-items:center;"><img class="shot" src="assets/ad5f040f51cfb9ec843df07071cd1bd7.jpg" alt="Sitio de Acoso.Online" style="width:440px; height:275px;"><div class="stack"><h3>Acoso.Online</h3><p class="small">Nació en Chile. Qué hacer si publican tus imágenes íntimas.</p></div></div>
+<div class="row" style="gap:24px; align-items:center;"><img class="shot" src="assets/ee2a56bc934eedae23cbab672256a5ce.jpg" alt="Sitio de ONG Amaranta" style="width:440px; height:275px;"><div class="stack"><h3>Amaranta</h3><p class="small">Desde el centro-sur de Chile: género, tecnología y DDHH.</p></div></div>
+</div>
+
+</section>
+<section id="origen-sentido" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Por qué lo entendemos así</p>
+<h2>Tres palabras, tres decisiones</h2>
+<div class="cards3 grow">
+<div class="card rise" style="--i:0"><p class="tag">Autodefensa</p><h3>Tomar las herramientas</h3><p class="body">No esperamos a que las plataformas o el Estado nos protejan. Aprendemos a cuidarnos, sin cargar con la culpa.</p></div>
+<div class="card purple rise" style="--i:1"><p class="tag">Digital</p><h3>El cuerpo digital es cuerpo</h3><p class="body">Lo que pasa en la pantalla se siente en la piel, en el sueño, en los estudios. No es “virtual”.</p></div>
+<div class="card accent rise" style="--i:2"><p class="tag">Feminista</p><h3>Situada y colectiva</h3><p class="body">La violencia tiene género. Por eso la respuesta no es individual: nos cuidamos entre nosotras.</p></div>
+</div>
+<div class="line"><p class="tag">No es</p><p class="body">Ciberseguridad de empresa. No protegemos servidores: protegemos vidas, voces y vínculos.</p></div>
+
+</section>
+<section id="internet-no-neutra">
+<img class="shot" src="assets/520d8e7f68215b0adb1123c88af3af78.jpg" alt="Collage de Cecilia Ananías: la materialidad de internet, con data centers, corporaciones, cables submarinos, minería y vigilancia" style="position:absolute; left:960px; top:150px; width:832px; height:468px; transform:rotate(1.5deg);">
+<div class="col" style="width:760px; flex:none;">
+<p class="eyebrow">Pregunta a la sala</p>
+<h2>¿Qué nos gusta y qué no de internet?</h2>
+<div class="stack">
+<div class="line rise" style="--i:0"><p class="tag" style="min-width:150px;">Nos gusta</p><p class="body">Aprender, organizarnos, encontrarnos, amplificar voces, explorar el placer.</p></div>
+<div class="line rise" style="--i:1"><p class="tag" style="min-width:150px;">No nos gusta</p><p class="body">Vigilancia, acoso, grupos de odio, algoritmos que premian la rabia.</p></div>
+</div>
+<div class="card accent rise" style="--i:2; padding:24px 36px;"><h3>Internet no es neutra.</h3><p class="body">Tiene una materialidad: corporaciones, data centers, cables, minería. Refleja las desigualdades de afuera.</p></div>
+</div>
+<p class="source" style="position:absolute; left:960px; top:650px; width:832px;">Collage: Cecilia Ananías, ONG Amaranta.</p>
+
+</section>
+<section id="aqui" class="yellow center">
+<img class="split-img" src="assets/ba69b604e3edb77393132328f3f82448.jpg" alt="Ilustración de Amaranta: Juntas somos la llama" style="object-fit:contain; background:#B6A190;">
+<div class="col" style="justify-content:center;">
+<p class="eyebrow">Situarnos</p>
+<p class="quote rise">Esto no pasa “en internet”.</p>
+<p class="quote rise hl" style="--i:1">Pasa en Temuco, en Padre Las Casas, en Lautaro.</p>
+<p class="lead rise" style="--i:2">Les pasa a personas que conocemos.</p>
+</div>
+
+</section>
+<section id="titulares" class="lilac" style="gap:28px;">
+<p class="eyebrow">Lo que leímos estas semanas</p>
+<h2>Titulares de octubre y noviembre</h2>
+<div style="position:relative; width:1664px; height:680px;">
+<img class="shot fade" src="assets/dfec5404ed356a6fa16e47bc8ea3eb61.jpg" alt="BioBioChile: Fiscalía investiga grupos de Telegram que difundían imágenes íntimas de mujeres en La Araucanía" style="position:absolute; left:0; top:0; width:820px; height:456px; transform:rotate(-2deg);">
+<img class="shot fade" src="assets/d11601dace41691cdd56ad0846cdc46b.jpg" alt="T13: Denuncian red que filtran imágenes privadas" style="position:absolute; left:860px; top:20px; width:800px; height:327px; transform:rotate(2deg); --i:1;">
+<img class="shot fade" src="assets/64867b1c07359f0ccd73be13b84ba127.jpg" alt="24Horas: Investigan red de Telegram en Temuco por difundir contenido íntimo de más de 30 mujeres" style="position:absolute; left:640px; top:372px; width:940px; height:303px; transform:rotate(-1deg); --i:2;">
+</div>
+
+</section>
+<section id="telegram">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Temuco y Padre Las Casas</p>
+<h2>Grupos de Telegram en La Araucanía</h2>
+<div class="cards2 grow">
+<div class="card rise" style="--i:0; padding:28px 40px;"><p class="big">+30</p><p class="body">mujeres afectadas según la Fiscalía, entre ellas una adolescente de 16 años.</p></div>
+<div class="card rise" style="--i:1; padding:28px 40px;"><p class="big">~3.000</p><p class="body">participantes en dos grupos, según la abogada que presentó la querella.</p></div>
+<div class="card purple rise" style="--i:2; padding:28px 40px;"><p class="tag">De dónde salían las fotos</p><p class="body">De perfiles de Instagram y Tinder. Circulaban con nombres y ocupaciones.</p></div>
+<div class="card accent rise" style="--i:3; padding:28px 40px;"><p class="tag">Quiénes participaban</p><p class="body">Un médico, un psicólogo, estudiantes universitarios y militares, según las víctimas.</p></div>
+</div>
+<p class="source">Fuentes: BioBioChile (26-10-2026), 24Horas, T13 (11-11-2026), Página 7. Las cifras varían entre medios.</p>
+
+</section>
+<section id="casos-chile" class="lilac">
+<p class="eyebrow">No es la primera vez</p>
+<h2>Casos que ya habíamos documentado</h2>
+<div class="row grow">
+<div class="stack grow"><img class="shot" src="assets/7383428c86047feed22186bd97a72e46.jpg" alt="Lámina de Amaranta: violencia digital por parte de grupos masivos, con titulares de prensa" style="width:800px; height:450px;"><p class="small"><b>Grupos masivos:</b> “confesiones” de Meta y grupos de Telegram. Buscan que la persona se vaya de internet.</p></div>
+<div class="stack grow"><img class="shot" src="assets/a1ef36355f094ebfa970fa58b2daf78d.jpg" alt="Lámina de Amaranta sobre el caso de la cuenta funando encapuchadas, julio de 2020" style="width:800px; height:450px;"><p class="small"><b>Julio 2020:</b> una cuenta de Instagram expuso a 20 mujeres con fotos sacadas de Tinder, por tener #Apruebo en su perfil.</p></div>
+</div>
+
+</section>
+<section id="defensora" class="dark">
+<img class="shot" src="assets/21e219a2d5cebf9e1bd71d016fcc4484.jpg" alt="El Desconcierto, 9 de noviembre de 2026: Ambientalista denuncia campaña de difamación por oposición a proyecto de incineradora de basura en Lautaro" style="position:absolute; left:960px; top:120px; width:832px; height:510px; transform:rotate(1.5deg);">
+<img class="shot" src="assets/393a7c3031b537c9b0b289b12677158c.jpg" alt="Araucanía Diario: Alejandra Parra habla con la prensa junto a otras mujeres" style="position:absolute; left:1040px; top:600px; width:620px; height:390px; transform:rotate(-2deg);">
+<div class="col" style="width:760px; flex:none;">
+<p class="eyebrow">Noviembre de 2026 · Lautaro</p>
+<h2>Defensora ambiental atacada con IA</h2>
+<p>Alejandra Parra se opuso a la incineradora WTE Araucanía. La respuesta: amenazas y un video falso hecho con IA.</p>
+<div class="card purple"><p class="tag">Esto tiene nombre</p><h3>Violencia político-sexual</h3><p class="body">Busca callar a una mujer con voz pública.</p></div>
+<p class="source">Fuentes: El Desconcierto (09-11-2026), Araucanía Diario, El Ciudadano.</p>
+</div>
+
+</section>
+<section id="ia-escuela">
+<p class="eyebrow">2026 · Chile</p>
+<h2>La imagen es falsa. El daño es real.</h2>
+<div class="row grow">
+<img class="shot" src="assets/57c91155ce92a6ac3dd94b2e4e41e964.jpg" alt="Diario Concepción: La IA no puede usarse para vulnerar a niñas, ministra de la Mujer y fotos adulteradas en colegio sampedrino" style="width:760px; height:532px;">
+<div class="stack grow">
+<div class="line"><p class="tag">Agosto</p><p class="body">Fotos de estudiantes de un colegio de San Pedro de la Paz adulteradas con IA.</p></div>
+<div class="line"><p class="tag">Julio</p><p class="body">La Cámara aprobó en general un proyecto que sanciona los deepfakes. <b>Aún no es ley.</b></p></div>
+<div class="line"><p class="tag">Mayo</p><p class="body">Instagram dejó de cifrar de extremo a extremo los mensajes directos.</p></div>
+</div>
+</div>
+<p class="source">Fuentes: Diario Concepción (13-08-2026); BioBioChile (23-07-2026); material de ONG Amaranta.</p>
+
+</section>
+<section id="vdg" class="lilac">
+<img class="split-img" src="assets/f7e35d27a4ef24c2cf70a106076b99ac.jpg" alt="Ilustración de Amaranta: una mujer con una llama en el pecho">
+<div class="col">
+<p class="eyebrow">Nombrar</p>
+<h2>Violencia de género facilitada por tecnologías</h2>
+<p>Daño contra una persona que surge de las desigualdades de género, y que se comete o se amplifica a través de tecnologías.</p>
+<div class="stack">
+<div class="line rise" style="--i:0"><p class="tag">No es neutra</p><p class="body">Refleja y amplifica lo de afuera.</p></div>
+<div class="line rise" style="--i:1"><p class="tag">No es “bullying”</p><p class="body">Es por ser mujer o disidencia.</p></div>
+<div class="line rise" style="--i:2"><p class="tag">No es “virtual”</p><p class="body">Afecta cuerpo, salud y estudios.</p></div>
+</div>
+</div>
+
+</section>
+<section id="tres-formas">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Tres formas que vemos hoy</p>
+<h2>¿Quién ataca y desde dónde?</h2>
+<div class="cards3 grow">
+<div class="card rise" style="--i:0"><p class="tag">Íntima</p><h3>Desde una relación</h3><p class="body">Pareja o expareja. Pide contraseñas, revisa el celular, controla con quién hablas, amenaza con difundir. Es la que más cuesta reconocer.</p></div>
+<div class="card purple rise" style="--i:1"><p class="tag">Masiva</p><h3>Desde grupos</h3><p class="body">Desconocidos o gente del entorno organizada: grupos de Telegram, páginas de “confesiones”, foros. Buscan que la persona se vaya de internet.</p></div>
+<div class="card accent rise" style="--i:2"><p class="tag">Político-sexual</p><h3>Contra quien alza la voz</h3><p class="body">Contra dirigentas, defensoras, periodistas o cualquier mujer que opina. El cuerpo se vuelve territorio de disputa.</p></div>
+</div>
+
+</section>
+<section id="tipos" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Para reconocerla</p>
+<h2>Algunas formas concretas</h2>
+<div class="cards3 grow">
+<div class="card" style="padding:28px 36px;"><p class="tag">Difusión no consentida</p><p class="body">Compartir fotos o videos íntimos sin permiso. También recibir imágenes sexuales que no pediste.</p></div>
+<div class="card purple" style="padding:28px 36px;"><p class="tag">Deepfake sexual</p><p class="body">Fotos o videos creados con IA a partir de una foto cualquiera.</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Doxxeo</p><p class="body">Publicar tu nombre, dirección, carrera, teléfono o rutinas sin tu consentimiento.</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Acoso y hostigamiento</p><p class="body">Mensajes insistentes, amenazas, humillación, perfiles falsos.</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Pérdida de acceso</p><p class="body">Alguien entra a tu cuenta o te deja afuera, como un ladrón en tu casa.</p></div>
+<div class="card accent" style="padding:28px 36px;"><p class="tag">Control y vigilancia</p><p class="body">Revisar tu celular, exigir claves, ubicación compartida a la fuerza, apps espía.</p></div>
+</div>
+
+</section>
+<section id="cuerpo" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Cuerpo físico, cuerpo digital</p>
+<h2>El cuerpo también es territorio</h2>
+<div class="cards2 grow">
+<div class="card rise" style="--i:0"><p class="tag">Lorena Cabnal · Guatemala</p><p class="quote" style="font-size:52px;">“Cuerpo-territorio”</p><p class="body">Desde el feminismo comunitario maya-xinka: defender la tierra y defender el cuerpo de las mujeres es la misma lucha.</p></div>
+<div class="card purple rise" style="--i:1"><p class="tag">Rita Segato · Argentina</p><p class="quote" style="font-size:52px;">“Escribir en el cuerpo”</p><p class="body">La violencia marca el cuerpo de las mujeres como territorio de quien ataca. Difundir o falsificar su imagen hace lo mismo.</p></div>
+</div>
+<div class="card accent rise" style="--i:2; padding:24px 36px;"><p class="body"><b>Por eso decimos cuerpo digital:</b> el daño no es virtual. Se siente en la reputación, el sueño, los estudios y la salud.</p></div>
+
+</section>
+<section id="aurora" class="dark center">
+<img class="split-img" src="assets/5d6a66ca8a39912568bca260186b389a.jpg" alt="Ilustración de Amaranta: un grupo de mujeres juntas bajo la luna">
+<div class="col" style="justify-content:center;">
+<p class="eyebrow">Proyecto Aurora · ONG Amaranta</p>
+<p class="stat rise">73,8%</p>
+<p class="lead rise" style="--i:1">de 531 mujeres de las 16 regiones había vivido violencia en espacios digitales.</p>
+<p class="lead rise" style="--i:2">Un <b class="hl">17%</b> no se reconocía como sobreviviente porque había ocurrido en el plano íntimo.</p>
+</div>
+
+</section>
+<section id="culpa" class="yellow center">
+<img class="split-img" src="assets/7857463d3a144992151ecfa2682bca09.jpg" alt="Ilustración de Amaranta: una mujer con la mano en el corazón">
+<div class="col" style="justify-content:center;">
+<p class="eyebrow">Antes de las herramientas</p>
+<p class="quote rise">El problema no es tu foto.</p>
+<p class="quote rise" style="--i:1; color:#D81B7A;">Es quien decide usarla para dañar.</p>
+<p class="lead rise" style="--i:2">La seguridad digital no es para culparnos: es para cuidarnos, juntas.</p>
+</div>
+
+</section>
+<section id="pausa" class="amaranta center">
+<img class="split-img" src="assets/5d6a66ca8a39912568bca260186b389a.jpg" alt="Ilustración de Amaranta: un grupo de mujeres juntas bajo la luna">
+<div class="col" style="justify-content:center;">
+<p class="eyebrow">Cinco minutos</p>
+<p class="quote rise">Pausa.</p>
+<p class="lead rise" style="--i:1">Estira, toma agua, respira.<br>Y desbloquea tu celular: lo que viene es práctico.</p>
+<p class="small rise" style="--i:2"><b>Si algo te removió, puedes acercarte a conversar.</b></p>
+</div>
+
+</section>
+<section id="modelo-amenazas" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Hacer · 16:10 · Antes de configurar</p>
+<h2>Tu plan en cinco preguntas</h2>
+<div class="row grow">
+<div class="stack grow">
+<div class="line rise" style="--i:0"><p class="tag" style="min-width:64px;">1</p><p class="body"><b>¿Qué quiero proteger?</b> Fotos, ubicación, conversaciones, cuentas.</p></div>
+<div class="line rise" style="--i:1"><p class="tag" style="min-width:64px;">2</p><p class="body"><b>¿De quién?</b> Una expareja, un grupo de desconocidos, alguien que odia lo que opino.</p></div>
+<div class="line rise" style="--i:2"><p class="tag" style="min-width:64px;">3</p><p class="body"><b>¿Qué tan probable es?</b> Según lo que me ha pasado a mí o a otras.</p></div>
+<div class="line rise" style="--i:3"><p class="tag" style="min-width:64px;">4</p><p class="body"><b>¿Qué pasaría si ocurre?</b> ¿Qué tan grave sería para mí?</p></div>
+<div class="line rise" style="--i:4"><p class="tag" style="min-width:64px;">5</p><p class="body"><b>¿Cuánto esfuerzo puedo poner hoy?</b> Empieza chico.</p></div>
+</div>
+<div class="card accent" style="width:520px;"><p class="tag">Ejercicio en parejas · 4 min</p><h3>Elige un escenario</h3><p class="body">A: mi ex conoce mis claves.<br>B: mi foto apareció en un grupo.<br>C: me atacan por opinar.<br><br>Respondan las cinco preguntas para ese caso.</p></div>
+</div>
+
+</section>
+<section id="bingo-reglas" class="dark">
+<img class="split-img" src="assets/530e907695491ce879a020d5c396e459.jpg" alt="Ilustración de Amaranta: dos personas chocan las manos bajo una estrella">
+<div class="col">
+<p class="eyebrow">Manos a la obra · 16:14</p>
+<h2>Bingo de la autodefensa digital</h2>
+<div class="steps">
+<div class="step rise" style="--i:0"><p class="num">1</p><div class="txt"><h3>Marca lo que ya haces</h3><p class="muted">Dos minutos, con honestidad.</p></div></div>
+<div class="step rise" style="--i:1"><p class="num">2</p><div class="txt"><h3>Completa en vivo</h3><p class="muted">Diez minutos configurando tu celular.</p></div></div>
+<div class="step rise" style="--i:2"><p class="num">3</p><div class="txt"><h3>Ayuda a la de al lado</h3><p class="muted">Enseñar una configuración también cuenta.</p></div></div>
+<div class="step rise" style="--i:3"><p class="num">4</p><div class="txt"><h3>¡Canta BINGO!</h3><p class="muted">Cuéntanos qué configuraste y reclama tu premio.</p></div></div>
+</div>
+</div>
+
+</section>
+<section id="bingo" class="amaranta" style="padding:40px 128px; align-items:center; justify-content:center;">
+<img class="pop" src="assets/f6ff400359c0323b71c6829375a9dd75.png" alt="Cartón del Bingo de la seguridad en Internet de ONG Amaranta, con once casillas y el logo de Amaranta al centro" style="width:715px; height:1000px; object-fit:contain; background:#FFFFFF;">
+
+</section>
+<section id="manos" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Paso a paso · mientras juegan</p>
+<h2>Las cuatro configuraciones clave</h2>
+<div class="cards2 grow">
+<div class="card" style="padding:28px 40px;"><p class="tag">WhatsApp</p><p class="body">Ajustes › Cuenta › <b>Verificación en dos pasos</b>. Luego Privacidad › Grupos › <b>Mis contactos</b>.</p></div>
+<div class="card purple" style="padding:28px 40px;"><p class="tag">Instagram</p><p class="body">Centro de cuentas › Contraseña y seguridad › <b>Autenticación en dos pasos</b> y <b>Dónde iniciaste sesión</b>.</p></div>
+<div class="card purple" style="padding:28px 40px;"><p class="tag">Google / Gmail</p><p class="body">myaccount.google.com/security › <b>Verificación en dos pasos</b>, teléfono y correo de recuperación propios.</p></div>
+<div class="card" style="padding:28px 40px;"><p class="tag">Celular</p><p class="body">Bloqueo con <b>PIN de 6 dígitos</b> o más. Cámara › desactiva <b>guardar ubicación</b> en las fotos.</p></div>
+</div>
+
+</section>
+<section id="telegram-video" class="dark" style="align-items:center;">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Telegram · paso a paso</p>
+<h2>Cinco ajustes en ochenta segundos</h2>
+<img class="shot" src="assets/d86f7b1ff3cd207709aa5db9c7e2d227.jpg" data-video="assets/ada994d2fd36a5100a268a6f9109cc9e.mp4" data-video-start="click" alt="Tutorial animado de Amaranta: cinco ajustes de privacidad y seguridad en Telegram" style="width:1131px; height:636px; object-fit:contain;">
+
+</section>
+<section id="telegram-config" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Telegram · protegerte</p>
+<h2>Ajustes › Privacidad y seguridad</h2>
+<div class="row grow" style="align-items:flex-start;">
+<div class="phone">
+<p class="bar">Privacidad y seguridad</p>
+<p class="item on">Número de teléfono · Nadie</p>
+<p class="item">Última vez · Mis contactos</p>
+<p class="item">Foto de perfil · Mis contactos</p>
+<p class="item on">Grupos y canales · Mis contactos</p>
+<p class="item on">Verificación en dos pasos · Activada</p>
+</div>
+<div class="stack grow">
+<div class="card" style="padding:22px 36px;"><p class="tag">Número de teléfono</p><p class="body">Que <b>nadie</b> lo vea y que solo tus contactos te encuentren por él.</p></div>
+<div class="card" style="padding:22px 36px;"><p class="tag">Grupos y canales</p><p class="body">Solo <b>mis contactos</b> pueden añadirte. Nadie te mete a un grupo sin permiso.</p></div>
+<div class="card" style="padding:22px 36px;"><p class="tag">Verificación en dos pasos</p><p class="body">Una <b>contraseña adicional</b>. Sin ella, basta un código por SMS para entrar.</p></div>
+</div>
+</div>
+
+</section>
+<section id="telegram-bajar">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Telegram · bajar un canal o grupo</p>
+<h2>Reportar desde la app, paso a paso</h2>
+<div class="row grow" style="justify-content:space-between; align-items:flex-start;">
+<div class="phone-col rise" style="--i:0">
+<div class="phone">
+<p class="bar">t.me/nombre_del_canal</p>
+<p class="item">Silenciar</p>
+<p class="item">Buscar</p>
+<p class="item on">⋮ Más opciones</p>
+</div>
+<p class="cap"><b>1.</b> Abre el canal o grupo y toca su nombre. Luego el menú <b>⋮</b>.</p>
+</div>
+<div class="phone-col rise" style="--i:1">
+<div class="phone">
+<p class="bar">Más opciones</p>
+<p class="item">Compartir</p>
+<p class="item on">Reportar</p>
+<p class="item">Abandonar</p>
+</div>
+<p class="cap"><b>2.</b> Toca <b>Reportar</b>. Para un mensaje: mantenlo presionado › Reportar.</p>
+</div>
+<div class="phone-col rise" style="--i:2">
+<div class="phone">
+<p class="bar">¿Por qué lo reportas?</p>
+<p class="item on">Contenido sexual ilegal</p>
+<p class="item">Datos personales</p>
+<p class="item">Abuso infantil</p>
+</div>
+<p class="cap"><b>3.</b> Elige el motivo y <b>escribe un comentario</b>: “imágenes íntimas sin consentimiento”.</p>
+</div>
+</div>
+
+</section>
+<section id="denunciar-video" class="dark" style="align-items:center;">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Telegram · grupos masivos</p>
+<h2>Cómo denunciar un grupo, paso a paso</h2>
+<img class="shot" src="assets/ff76f29062ce86dda6e9616dbea379cb.jpg" data-video="assets/3729dbce8786612b37731025b6e00223.mp4" data-video-start="click" alt="Tutorial animado de Amaranta: cómo guardar evidencia, copiar el enlace, reportar un grupo y sus mensajes y escribir a Telegram" style="width:1131px; height:636px; object-fit:contain;">
+
+</section>
+<section id="telegram-correo" class="lilac">
+<p class="eyebrow">Telegram · además del botón</p>
+<h2>Escribirle a Telegram y denunciar</h2>
+<div class="row grow" style="align-items:flex-start;">
+<div class="mail" style="width:880px;">
+<p class="hdr">Para: abuse@telegram.org</p>
+<p class="hdr">Asunto: Non-consensual intimate images – urgent takedown</p>
+<p>Hello. The following channel is sharing intimate images of women without their consent, together with their personal data (names and workplaces). It violates Telegram’s Terms of Service and is under criminal investigation in Chile. Please remove it:</p>
+<p><b>t.me/[nombre_del_canal]</b><br>t.me/[nombre_del_canal]/[número del mensaje]</p>
+</div>
+<div class="stack grow">
+<div class="line"><p class="tag" style="min-width:150px;">Menores</p><p class="body">Si hay menores de 18: <b>stopCA@telegram.org</b></p></div>
+<div class="line"><p class="tag" style="min-width:150px;">Grupos privados</p><p class="body">Telegram dice que no procesa pedidos sobre chats privados: ahí la vía es <b>PDI o Fiscalía</b>.</p></div>
+<img class="shot" src="assets/0129a8329b3519d8469fa1bbc4bda590.jpg" alt="Página de moderación de Telegram: 30.403.375 grupos y canales bloqueados en 2026" style="width:680px; height:300px;">
+</div>
+</div>
+
+</section>
+<section id="ia-fotos" class="lilac">
+<img class="split-img" src="assets/3908b3dee30a89d190c533d5ec2945f3.jpg" alt="Ilustración de Amaranta: una mujer se mira en la pantalla de su celular">
+<div class="col">
+<p class="eyebrow">IA y nuestras fotos</p>
+<h2>Menos exposición, sin dejar de existir</h2>
+<div class="stack">
+<div class="line"><p class="tag">Mira tu perfil</p><p class="body">Desde una cuenta que no te sigue: ¿qué queda a la vista?</p></div>
+<div class="line"><p class="tag">Mejores amigos</p><p class="body">Para fotos personales, historias solo para tu lista.</p></div>
+<div class="line"><p class="tag">Seguidores</p><p class="body">Saca cuentas que no conoces: así se arman las carpetas.</p></div>
+<div class="line" style="background:#F6CF3A;"><p class="tag" style="color:#2A0E4A;">Si ves un deepfake</p><p class="body">No lo compartas. Reporta, guarda evidencia y avisa.</p></div>
+</div>
+</div>
+
+</section>
+<section id="huella" class="yellow">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Ejercicio · 3 minutos</p>
+<h2>Búscate como te buscaría quien quiere dañarte</h2>
+<div class="row grow">
+<div class="steps grow" style="gap:22px;">
+<div class="step"><p class="num" style="color:#2A0E4A;">1</p><div class="txt"><h3>Tu nombre entre comillas</h3><p>“Nombre Apellido” + Temuco, + UCT, + tu carrera.</p></div></div>
+<div class="step"><p class="num" style="color:#2A0E4A;">2</p><div class="txt"><h3>Tu foto de perfil</h3><p>Búscala con Google Lens: ¿dónde más aparece?</p></div></div>
+<div class="step"><p class="num" style="color:#2A0E4A;">3</p><div class="txt"><h3>Pide que la saquen</h3><p>“Resultados sobre ti” de Google: teléfono, dirección, correo.</p></div></div>
+</div>
+<div class="card" style="width:600px;"><p class="tag">Y compartimenta</p><h3>Una cuenta para lo público, otra para lo íntimo</h3><p class="body">En la cuenta de activismo o pública, nada de datos sensibles; incluso puedes usar seudónimo. En la personal, contactos revisados y más capas de seguridad.</p><p class="body"><b>datadetoxkit.org</b> te guía paso a paso.</p></div>
+</div>
+
+</section>
+<section id="contrasenas" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Contraseñas bacanes</p>
+<h2>Larga le gana a rara</h2>
+<p class="phrase rise">lagarto-canela-micro-volcán-27</p>
+<div class="cards3 grow">
+<div class="card rise" style="--i:1"><p class="tag">Frase, no palabra</p><p class="body">Cuatro o cinco palabras al azar. Fácil de recordar, muy difícil de adivinar.</p></div>
+<div class="card purple rise" style="--i:2"><p class="tag">Una por cuenta</p><p class="body">Si se filtra una, no caen todas. Guárdalas en un gestor: <b>Bitwarden</b> o <b>KeePassXC</b>.</p></div>
+<div class="card accent rise" style="--i:3"><p class="tag">Dos pasos con app</p><p class="body">Mejor una app (Aegis, Ente Auth) que SMS: el SMS se puede robar duplicando tu chip.</p></div>
+</div>
+
+</section>
+<section id="mitos" class="yellow">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Bajo el capó · 16:35 · ¿Verdadero o falso?</p>
+<h2>Mitos que circulan</h2>
+<div class="cards2 grow">
+<div class="card" style="padding:24px 32px;"><p class="tag">Mito 1</p><h3>“El modo incógnito me hace anónima.”</h3><p class="body fragment">Falso: solo no guarda historial en tu equipo. La red y los sitios igual te ven.</p></div>
+<div class="card" style="padding:24px 32px;"><p class="tag">Mito 2</p><h3>“Si borro el mensaje, desaparece.”</h3><p class="body fragment">Falso: pudieron hacerle captura o ya estaba guardado en otro celular.</p></div>
+<div class="card" style="padding:24px 32px;"><p class="tag">Mito 3</p><h3>“Telegram es más seguro que WhatsApp.”</h3><p class="body fragment">Falso: Telegram no cifra de punta a punta los chats normales ni los grupos.</p></div>
+<div class="card" style="padding:24px 32px;"><p class="tag">Mito 4</p><h3>“Una VPN gratis me protege de todo.”</h3><p class="body fragment">Falso: puede vender tu navegación. Y no protege de estafas ni apps espía.</p></div>
+</div>
+
+</section>
+<section id="quien-ve" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Bajo el capó</p>
+<h2>¿Quién ve qué cuando navegas?</h2>
+<table class="tbl">
+<tr><th style="width:28%;">Quién mira</th><th style="width:24%;">Solo con el candado (HTTPS)</th><th style="width:24%;">Con VPN</th><th style="width:24%;">Con Tor</th></tr>
+<tr><td>El Wi-Fi de la U</td><td>Qué sitios visitas</td><td>Que usas una VPN</td><td>Que usas Tor</td></tr>
+<tr><td>Tu compañía de internet</td><td>Qué sitios visitas</td><td>Que usas una VPN</td><td>Que usas Tor</td></tr>
+<tr><td>La empresa de la VPN</td><td>Nada</td><td>Qué sitios visitas</td><td>Nada</td></tr>
+<tr><td>El sitio que visitas</td><td>Tu IP, que dice tu ciudad</td><td>La IP de la VPN</td><td>Una IP de Tor</td></tr>
+<tr><td>Si inicias sesión</td><td>Sabe que eres tú</td><td>Sabe que eres tú</td><td>Sabe que eres tú</td></tr>
+</table>
+<p class="lead">El candado protege <b class="hl">lo que escribes</b>. La VPN y Tor esconden <b class="hl">a dónde vas</b>. Ninguno te protege si entregas tus datos.</p>
+
+</section>
+<section id="vpn" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Bajo el capó</p>
+<h2>VPN: lo que hace y lo que no</h2>
+<div class="cards2">
+<div class="card rise" style="--i:0"><p class="tag">Sí hace</p><p class="body">Esconde a qué sitios entras del Wi-Fi público y de tu compañía. Oculta tu IP, o sea, tu ubicación aproximada. Útil en redes de la U, cafés o aeropuertos.</p></div>
+<div class="card purple rise" style="--i:1"><p class="tag">No hace</p><p class="body">No te vuelve anónima. No te protege de estafas, apps espía ni de alguien con tu celular en la mano. La empresa de la VPN ve tu tráfico.</p></div>
+</div>
+<div class="cards3 grow">
+<div class="card rise" style="--i:2; padding:24px 32px;"><p class="tag">Gratis y confiable</p><h3>Proton VPN</h3><p class="body">Sin límite de datos en su plan gratis.</p></div>
+<div class="card rise" style="--i:3; padding:24px 32px;"><p class="tag">De activistas</p><h3>RiseupVPN</h3><p class="body">Gratis, sin cuenta, financiada por donaciones.</p></div>
+<div class="card accent rise" style="--i:4; padding:24px 32px;"><p class="tag">Para anonimato</p><h3>Tor Browser</h3><p class="body">Más lento, pero nadie une quién eres y a dónde vas.</p></div>
+</div>
+<p class="source">Ojo con las VPN gratis desconocidas de la tienda de apps: si no pagas, muchas veces el producto eres tú.</p>
+
+</section>
+<section id="cifrado">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Bajo el capó · cifrado</p>
+<h2>¿Quién más puede leer tus mensajes?</h2>
+<table class="tbl">
+<tr><th style="width:18%;">App</th><th style="width:30%;">Cifrado de punta a punta</th><th style="width:30%;">Lo que igual sabe la app</th><th style="width:22%;">Úsala para</th></tr>
+<tr><td><b>WhatsApp</b></td><td>Sí, por defecto</td><td>Con quién hablas y cuándo</td><td>El día a día</td></tr>
+<tr><td><b>Telegram</b></td><td>Solo en chats secretos</td><td>Todo lo de chats y grupos</td><td>Grupos y canales</td></tr>
+<tr><td><b>Instagram</b></td><td>No en mensajes directos</td><td>Lo que escribes</td><td>Nada sensible</td></tr>
+<tr><td><b>Signal</b></td><td>Sí, en todo</td><td>Casi nada</td><td>Lo íntimo y sensible</td></tr>
+</table>
+<div class="line"><p class="tag">Ojo</p><p class="body">El cifrado protege el camino, no el celular. Si alguien lo tiene desbloqueado, lo lee todo: usa <b>mensajes temporales</b> y PIN.</p></div>
+
+</section>
+<section id="vigilancia" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Violencia íntima · control</p>
+<h2>¿Me están vigilando el celular?</h2>
+<div class="row grow">
+<div class="stack grow">
+<p class="tag-title">Señales</p>
+<div class="line dline"><p class="body">Sabe dónde estuviste o qué hablaste sin que se lo contaras.</p></div>
+<div class="line dline"><p class="body">Apps que no instalaste, o batería y datos que se gastan raro.</p></div>
+<div class="line dline"><p class="body">Tu cuenta de Google o iCloud abierta en un equipo que no es tuyo.</p></div>
+</div>
+<div class="stack grow">
+<p class="tag-title">Revisa</p>
+<div class="line dline"><p class="body"><b>Ubicación compartida:</b> Google Maps, Buscar (iPhone), Life360.</p></div>
+<div class="line dline"><p class="body"><b>iPhone:</b> Ajustes › Privacidad › Comprobación de seguridad.</p></div>
+<div class="line dline"><p class="body"><b>Android:</b> Seguridad › Apps de administración del dispositivo.</p></div>
+</div>
+</div>
+<div class="card accent" style="padding:24px 36px;"><p class="body"><b>Antes de borrar una app espía, arma un plan con alguien de confianza.</b> Quien te vigila puede notarlo y escalar la violencia.</p></div>
+
+</section>
+<section id="si-me-pasa" class="dark">
+<img class="split-img" src="assets/91620fffec951fa7192462b717db73f5.jpg" alt="Ilustración de Amaranta: una mujer se abraza junto a una ventana con luna y flores">
+<div class="col">
+<p class="eyebrow">Responder · 16:48</p>
+<h2>Si me pasa a mí</h2>
+<div class="steps" style="gap:20px;">
+<div class="step rise" style="--i:0"><p class="num">1</p><div class="txt"><h3>No es tu culpa, no estás sola</h3><p class="muted">Cuéntale a alguien de confianza.</p></div></div>
+<div class="step rise" style="--i:1"><p class="num">2</p><div class="txt"><h3>Guarda evidencia primero</h3><p class="muted">Si reportas antes, la prueba puede desaparecer.</p></div></div>
+<div class="step rise" style="--i:2"><p class="num">3</p><div class="txt"><h3>Reporta y pide que lo bajen</h3><p class="muted">En la plataforma, StopNCII o Take It Down.</p></div></div>
+<div class="step rise" style="--i:3"><p class="num">4</p><div class="txt"><h3>Denuncia a tu ritmo</h3><p class="muted">Universidad, Fiscalía o PDI. Primero, orientación.</p></div></div>
+<div class="step rise" style="--i:4"><p class="num">5</p><div class="txt"><h3>Desconéctate y vuelve</h3><p class="muted">Internet también es nuestra.</p></div></div>
+</div>
+</div>
+
+</section>
+<section id="evidencia">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Paso 2, en detalle</p>
+<h2>Cómo guardar evidencia que sirva</h2>
+<div class="cards3 grow">
+<div class="card"><p class="big">1</p><p class="tag">Captura completa</p><p class="body">Pantalla entera, con la hora visible. Incluye el usuario con @ y el enlace, no solo el nombre.</p></div>
+<div class="card purple"><p class="big" style="color:#F6CF3A;">2</p><p class="tag">Copia el enlace</p><p class="body">De la publicación, el perfil o el canal (t.me/…). Anota fecha y hora en que lo viste.</p></div>
+<div class="card"><p class="big">3</p><p class="tag">Respaldo fuera del celular</p><p class="body">Envíatelo por correo o súbelo a la nube en una carpeta con fecha. No borres los originales.</p></div>
+</div>
+<div class="card accent"><p class="body"><b>Si es demasiado duro mirarlo, pídele a una amiga que documente por ti.</b> Acompañar también es eso.</p></div>
+
+</section>
+<section id="herramientas" class="lilac">
+<p class="eyebrow">Herramientas gratuitas</p>
+<h2>Dos páginas para guardar en favoritos</h2>
+<div class="row grow">
+<div class="stack grow">
+<img class="shot" src="assets/75fe08fea50b34979347ae7a937e49eb.jpg" alt="Página de inicio de StopNCII.org en español" style="width:780px; height:400px;">
+<p class="lead" style="font-size:32px;"><b>StopNCII.org</b> · Mayores de 18. Crea una huella de tu imagen en tu propio celular para que Instagram, Facebook, TikTok y otras la bloqueen, sin subirla.</p>
+</div>
+<div class="stack grow">
+<img class="shot" src="assets/1f87210941844dc1c8ddd747b4501d65.jpg" alt="Página de inicio de Have I Been Pwned" style="width:780px; height:400px;">
+<p class="lead" style="font-size:32px;"><b>haveibeenpwned.com</b> · Escribe tu correo y mira si apareció en una filtración. Si aparece, cambia esa contraseña.</p>
+</div>
+</div>
+
+</section>
+<section id="denunciar" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Para saber antes de denunciar</p>
+<h2>Lo que enfrentan quienes denuncian</h2>
+<div class="cards2">
+<div class="card" style="padding:24px 36px;"><p class="tag">Espacios inadecuados</p><p class="body">Sin privacidad para contar lo que pasó. En colegios, a veces la enfrentan con el agresor.</p></div>
+<div class="card" style="padding:24px 36px;"><p class="tag">Desconocimiento</p><p class="body">Funcionarios que no entienden el daño de la violencia en línea.</p></div>
+<div class="card" style="padding:24px 36px;"><p class="tag">Revictimización</p><p class="body">“¿Para qué subiste esa foto?”. Comentarios que culpan a la víctima.</p></div>
+<div class="card" style="padding:24px 36px;"><p class="tag">Repetir el relato</p><p class="body">Al menos tres veces ante distintas instituciones.</p></div>
+</div>
+<div class="card purple grow" style="padding:24px 36px;"><p class="tag">¿Y en Chile?</p><p class="body">No hay una ley especial de violencia digital. El proyecto que la tipifica (Boletín 13928-07) se tramita desde 2020. Mientras, se usan querellas penales, recursos de protección y los protocolos universitarios.</p></div>
+
+</section>
+<section id="rutas" class="dark">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Dónde pedir ayuda</p>
+<h2>Rutas, aquí y ahora</h2>
+<div class="cards3 grow">
+<div class="card accent" style="padding:28px 36px; border-color:#F6CF3A;"><p class="tag">En la UCT</p><h3>Dirección de Género</h3><p class="body" style="color:#2A0E4A;">Ley 21.369: protocolo obligatorio. [Contacto UCT]</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Orientación PDI</p><h3>+56 9 3459 9762</h3><p class="body">WhatsApp para violencias digitales.</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Apoyo emocional</p><h3>Vita Activa</h3><p class="body">apoyo@vita-activa.org<br>+56 9 3291 9018 (Signal o WhatsApp)</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Íntimas · mayores de 18</p><h3>StopNCII.org</h3><p class="body">Bloquea la imagen sin tener que subirla.</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Menores de 18</p><h3>Take It Down</h3><p class="body">takeitdown.ncmec.org</p></div>
+<div class="card" style="padding:28px 36px;"><p class="tag">Violencia en pareja</p><h3>Ley 21.675</h3><p class="body">Ley integral contra la violencia hacia las mujeres.</p></div>
+</div>
+
+</section>
+<section id="acompanar" class="lilac">
+<img class="split-img" src="assets/3f8d1ba9e0ec50bc8058e3b5e6f42382.jpg" alt="Ilustración de Amaranta: dos mujeres se trenzan el pelo">
+<div class="col">
+<p class="eyebrow">Nadie es una isla</p>
+<h2>Si le pasa a una amiga</h2>
+<div class="stack">
+<div class="line"><p class="tag" style="min-width:150px;">Di</p><p class="body">“Te creo.” “No es tu culpa.”</p></div>
+<div class="line"><p class="tag" style="min-width:150px;">No digas</p><p class="body">“¿Para qué mandaste esa foto?”</p></div>
+<div class="line"><p class="tag" style="min-width:150px;">Haz</p><p class="body">Documenta y reporta con ella.</p></div>
+<div class="line"><p class="tag" style="min-width:150px;">Nunca</p><p class="body">No reenvíes, ni para denunciar.</p></div>
+</div>
+<div class="card accent" style="padding:24px 32px;"><p class="body"><b>Si la foto llega a tu grupo:</b> di que eso no se comparte. El silencio también sostiene la violencia.</p></div>
+</div>
+
+</section>
+<section id="recursos" class="lilac">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" class="logo-sm">
+<p class="eyebrow">Para llevarse</p>
+<h2>Lee más y comparte</h2>
+<div class="row grow" style="align-items:flex-start;">
+<img class="shot" src="assets/f0d7cb604bb60dd01bef7703d81be465.jpg" alt="Lámina de Amaranta: guía práctica para reconocer y documentar la violencia digital, con código QR" style="width:800px; height:450px;">
+<img class="shot" src="assets/3506da40c341900290f4964d524882bb.jpg" alt="Lámina de Amaranta: Amaranta te lo explica, con código QR" style="width:800px; height:450px;">
+</div>
+<p class="lead" style="font-size:32px;">Los dos videos de Telegram de hoy quedan en <b>@AmarantaONG</b>. Escanea los códigos con la cámara del celular.</p>
+
+</section>
+<section id="cierre" class="amaranta center">
+<img class="split-img" src="assets/42fb44efbe65bb4b143c09cfb07d7f62.jpg" alt="Ilustración de Amaranta: puños en alto bajo un cielo con nubes">
+<div class="col" style="justify-content:center;">
+<img src="assets/c9a70cbaba7f136663a678cdb794e410.png" alt="Logo de ONG Amaranta" style="width:260px; height:187px;">
+<h1 class="rise">¡Internet también es <span class="hl">nuestra</span>!</h1>
+<p class="lead rise" style="--i:1">Una cosa que haré hoy al llegar a casa: ________</p>
+<p class="small rise" style="--i:2"><b>hola@amarantas.org · @AmarantaONG · amarantas.org</b></p>
+</div>
+
+</section>
+</div>
+<div id="nav"><span id="c"></span><button id="p" aria-label="Anterior">&#9664;</button><button id="n" aria-label="Siguiente">&#9654;</button><button id="f" aria-label="Pantalla completa">&#9974;</button></div>
+<script>
+(function(){
+var S=[].slice.call(document.querySelectorAll('#stage>section')),k=0,st=document.getElementById('stage');
+function fit(){var z=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate(-50%,-50%) scale('+z+')'}
+function frags(i){return [].slice.call(S[i].querySelectorAll('.fragment'))}
+function show(i,back){
+  S.forEach(function(s){s.classList.remove('on');s.querySelectorAll('video.vid').forEach(function(v){v.pause()})});
+  k=Math.max(0,Math.min(S.length-1,i));S[k].classList.add('on');
+  frags(k).forEach(function(f){f.classList.toggle('visible',!!back)});
+  document.getElementById('c').textContent=(k+1)+' / '+S.length;
+  try{history.replaceState(null,'','#'+(k+1))}catch(e){}
+}
+function next(){var h=frags(k).filter(function(f){return !f.classList.contains('visible')});if(h.length){h[0].classList.add('visible');return}if(k<S.length-1)show(k+1)}
+function prev(){var v=frags(k).filter(function(f){return f.classList.contains('visible')});if(v.length){v[v.length-1].classList.remove('visible');return}if(k>0)show(k-1,true)}
+function fs(){var d=document.documentElement;if(document.fullscreenElement)document.exitFullscreen();else if(d.requestFullscreen)d.requestFullscreen()}
+document.querySelectorAll('img[data-video]').forEach(function(im){
+  var v=document.createElement('video');v.className=im.className+' vid';v.setAttribute('style',im.getAttribute('style'));
+  v.src=im.getAttribute('data-video');v.poster=im.getAttribute('src');v.preload='auto';v.playsInline=true;v.muted=true;v.setAttribute('aria-label',im.alt);
+  v.addEventListener('click',function(e){e.stopPropagation();v.paused?v.play():v.pause()});
+  im.replaceWith(v);
+});
+addEventListener('resize',fit);
+addEventListener('keydown',function(e){
+  if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>=0){e.preventDefault();next()}
+  else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>=0){e.preventDefault();prev()}
+  else if(e.key==='f'||e.key==='F')fs();
+  else if(e.key==='Home')show(0);else if(e.key==='End')show(S.length-1);
+});
+document.getElementById('n').onclick=function(e){e.stopPropagation();next()};
+document.getElementById('p').onclick=function(e){e.stopPropagation();prev()};
+document.getElementById('f').onclick=function(e){e.stopPropagation();fs()};
+document.addEventListener('click',function(e){if(!e.target.closest('#nav,video'))next()});
+var tx=null;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){dx<0?next():prev()}tx=null});
+fit();show((parseInt(location.hash.slice(1))||1)-1);
+})();
+</script></body></html>
